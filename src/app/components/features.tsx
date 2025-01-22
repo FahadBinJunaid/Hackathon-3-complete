@@ -65,7 +65,7 @@ const Features = () => {
             </svg>
             <h3 className="text-[20px] mb-2">Unbeatable prices</h3>
             <p className="text-[16px] text-neutral-600 leading-[150%]">
-              For our materials and quality you won't find better prices anywhere
+              For our materials and quality you won&lsquo;t find better prices anywhere
             </p>
           </div>
 

@@ -1,7 +1,7 @@
 // lib/storeOrder.ts
 import { createClient } from '@sanity/client';
 import dotenv from 'dotenv';
-import { NEXT_CACHE_REVALIDATE_TAG_TOKEN_HEADER } from 'next/dist/lib/constants';
+
 
 // Load environment variables
 dotenv.config();
@@ -10,7 +10,7 @@ const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   apiVersion: '2023-01-01',
-  token:"skc2sOFlOweRmSKDLl1kSCkQ6RZNr1YS7GJbMXiZ0WQcY6UqubbBYt82YwzHVFWFcbt98dFDnnaCDsb3ml2F5qceRwxpuMgFef72JGsmKMCOo9B1oYljCCOaY21LoR7KD2nGI4ll0EP3JYG5O9djDv0OJtMeHsYhBJvbDlW0dwBQsuy8rhay" ,
+  token:process.env.TOKEN,
   useCdn: false,
 });
 
