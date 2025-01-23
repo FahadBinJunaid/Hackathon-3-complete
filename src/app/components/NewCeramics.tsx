@@ -60,11 +60,12 @@ function NewCeramics() {
           <div key={product._id} className="group cursor-pointer">
             <Link
               href={{
-                pathname: `/product/${product._id}`,
+                pathname: `/product/${product._id && product.slug?.current}`,
                 query: {
                   name: product.name,
                   price: product.price,
                   image: product.image.asset.url,
+                  description: product.description,
                 },
               }}
             >

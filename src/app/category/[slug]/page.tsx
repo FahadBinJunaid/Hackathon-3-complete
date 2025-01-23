@@ -8,7 +8,7 @@ import Footer from "@/app/components/Footer";
 
 interface Product {
   slug: any;
-  description: string | number | boolean | readonly string[] | readonly number[] | readonly boolean[] | null | undefined;
+  description: string ;
   _id: string;
   name: string;
   price: number;
@@ -30,6 +30,7 @@ async function getProductsByCategory(slug: string) {
     _id,
     name,
     price,
+    description,
     "image": image.asset->url,
     category
   }`;
