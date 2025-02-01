@@ -1,20 +1,18 @@
-// ../api/order/route.ts
 import { createClient } from '@sanity/client';
 import { NextResponse } from 'next/server';
-import dotenv from 'dotenv';
 
-// Load environment variables
-dotenv.config({ path: '.env.local' });
-
+// Sanity client setup using environment variables
 const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID, // Set in Vercel dashboard
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,     // Set in Vercel dashboard
   apiVersion: '2023-01-01',
-  token: process.env.NEXT_PUBLIC_SANITY_TOKEN,
-  useCdn: false,
+  token: process.env.NEXT_PUBLIC_SANITY_TOKEN,         // Set in Vercel dashboard
+  useCdn: false, // Disable CDN for writes
 });
-
-// Function to save the order
+console.log("id",process.env.NEXT_PUBLIC_SANITY_PROJECT_ID)
+console.log("data",process.env.NEXT_PUBLIC_SANITY_DATASET)
+console.log("id",process.env.NEXT_PUBLIC_SANITY_TOKEN)
+// Function to save the order to Sanity
 const storeOrder = async (orderData: any) => {
   try {
     const order = await client.create({
