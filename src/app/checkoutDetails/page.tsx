@@ -3,13 +3,12 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { storeOrder } from "../api/order/route";
 
 // Define the types for the cart items
 interface CartItem {
   id: number;
   name: string;
-  productName: string; // Add productName to the interface
+  productName: string;
   description: string;
   price: number;
   image: string;
@@ -30,6 +29,7 @@ interface FormData {
 export default function BillingDetails() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -84,35 +84,37 @@ export default function BillingDetails() {
     e.preventDefault();
 
     // Validation for all fields
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.address ||
-      !formData.city ||
-      !formData.postalCode ||
-      !formData.country ||
-      !formData.phoneNumber
-    ) {
-      alert("Please fill out all billing details.");
+    if (Object.values(formData).some((field) => field.trim() === "")) {
+      setErrorMessage("Please fill out all billing details.");
       return;
     }
 
-    // Update order data to include productName
+    // Prepare order data
     const orderData = {
       ...formData,
       cartItems: cartItems.map((item) => ({
         productId: item.id.toString(),
-        productName: item.name, // Ensure the productName is being passed here
+        productName: item.name,
         quantity: item.quantity,
       })),
       subtotal: calculateSubtotal(),
     };
 
     setIsLoading(true);
+    setErrorMessage(null);
 
     try {
-      const order = await storeOrder(orderData); // Call storeOrder API function
+      const response = await fetch("/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData),
+      });
 
+      if (!response.ok) {
+        throw new Error("Failed to place order. Please try again.");
+      }
+
+      const order = await response.json();
       console.log("Order placed:", order);
 
       // Clear form and cart data after successful order
@@ -132,10 +134,10 @@ export default function BillingDetails() {
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error("Error placing order:", error.message);
-        alert("An error occurred while placing the order: " + error.message);
+        setErrorMessage(error.message);
       } else {
         console.error("Unexpected error:", error);
-        alert("An unexpected error occurred.");
+        setErrorMessage("An unexpected error occurred.");
       }
     } finally {
       setIsLoading(false);
@@ -161,22 +163,19 @@ export default function BillingDetails() {
           {/* Billing Details Form */}
           <div>
             <h2 className="text-3xl font-extrabold mb-8">Billing Details</h2>
+            {errorMessage && (
+              <p className="text-red-500 mb-4">{errorMessage}</p>
+            )}
             <div className="space-y-6">
-              {[{
-                label: "Full Name", name: "name", type: "text", placeholder: "Enter your name"
-              }, {
-                label: "Email Address", name: "email", type: "email", placeholder: "Enter your email"
-              }, {
-                label: "Address", name: "address", type: "textarea", placeholder: "Enter your address"
-              }, {
-                label: "City", name: "city", type: "text", placeholder: "Enter your city"
-              }, {
-                label: "Postal Code", name: "postalCode", type: "text", placeholder: "Enter your postal code"
-              }, {
-                label: "Country", name: "country", type: "text", placeholder: "Enter your country"
-              }, {
-                label: "Phone Number", name: "phoneNumber", type: "tel", placeholder: "Enter your phone number"
-              }].map(({ label, name, type, placeholder }, index) => (
+              {[
+                { label: "Full Name", name: "name", type: "text" },
+                { label: "Email Address", name: "email", type: "email" },
+                { label: "Address", name: "address", type: "textarea" },
+                { label: "City", name: "city", type: "text" },
+                { label: "Postal Code", name: "postalCode", type: "text" },
+                { label: "Country", name: "country", type: "text" },
+                { label: "Phone Number", name: "phoneNumber", type: "tel" },
+              ].map(({ label, name, type }, index) => (
                 <div key={index}>
                   <label htmlFor={name} className="block text-sm font-semibold">
                     {label}
@@ -189,7 +188,6 @@ export default function BillingDetails() {
                       onChange={handleInputChange}
                       required
                       className="w-full mt-2 border rounded-md px-4 py-3"
-                      placeholder={placeholder}
                     />
                   ) : (
                     <input
@@ -200,7 +198,6 @@ export default function BillingDetails() {
                       onChange={handleInputChange}
                       required
                       className="w-full mt-2 border rounded-md px-4 py-3"
-                      placeholder={placeholder}
                     />
                   )}
                 </div>
@@ -225,29 +222,13 @@ export default function BillingDetails() {
                     />
                     <div className="flex-1">
                       <h4 className="font-semibold">{item.name}</h4>
-                      <p className="text-sm text-gray-600">{item.description}</p>
-                      <p className="text-sm font-medium">{formatCurrency(item.price)}</p>
-                    </div>
-                    <div className="flex items-center">
-                      <button
-                        type="button"
-                        className="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300"
-                        onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
-                      >
-                        -
-                      </button>
-                      <span className="mx-3">{item.quantity}</span>
-                      <button
-                        type="button"
-                        className="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300"
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                      >
-                        +
-                      </button>
+                      <p className="text-sm font-medium">
+                        {formatCurrency(item.price)}
+                      </p>
                     </div>
                     <button
                       type="button"
-                      className="ml-4 text-red-500"
+                      className="text-red-500"
                       onClick={() => removeItem(item.id)}
                     >
                       Remove
@@ -257,9 +238,7 @@ export default function BillingDetails() {
               ) : (
                 <p className="text-gray-600">No items in your cart.</p>
               )}
-              <div className="mt-4">
-                <p className="font-semibold">Subtotal: {formatCurrency(calculateSubtotal())}</p>
-              </div>
+              <p className="font-semibold">Subtotal: {formatCurrency(calculateSubtotal())}</p>
             </div>
             <button
               type="submit"
