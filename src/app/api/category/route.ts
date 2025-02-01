@@ -5,7 +5,7 @@ export async function GET() {
     const query = `*[_type == "product"]{
         category{
             name,
-            slug,
+            slug
           },
     }`;
     const products = await sanity.fetch(query);

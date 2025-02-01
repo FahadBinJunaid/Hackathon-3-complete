@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { storeOrder } from "@/sanity/lib/storeOrder";
+import { storeOrder } from "../api/order/route";
 
 // Define the types for the cart items
 interface CartItem {
   id: number;
   name: string;
+  productName: string; // Add productName to the interface
   description: string;
   price: number;
   image: string;
@@ -96,10 +97,12 @@ export default function BillingDetails() {
       return;
     }
 
+    // Update order data to include productName
     const orderData = {
       ...formData,
       cartItems: cartItems.map((item) => ({
         productId: item.id.toString(),
+        productName: item.name, // Ensure the productName is being passed here
         quantity: item.quantity,
       })),
       subtotal: calculateSubtotal(),
