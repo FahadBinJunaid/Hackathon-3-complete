@@ -56,7 +56,6 @@ export default function AllProducts() {
     
     <div className="min-h-screen">
       {/* Wrapping the entire content in one parent div */}
-      <div>
         <Navbar />
 
         <div className="w-full pt-16 mt-16">
@@ -111,7 +110,6 @@ export default function AllProducts() {
 
         <Footer />
       </div>
- </div>
  
  );
 }
