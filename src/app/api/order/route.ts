@@ -9,9 +9,6 @@ const client = createClient({
   token: process.env.NEXT_PUBLIC_SANITY_TOKEN,         // Set in Vercel dashboard
   useCdn: false, // Disable CDN for writes
 });
-console.log("id",process.env.NEXT_PUBLIC_SANITY_PROJECT_ID)
-console.log("data",process.env.NEXT_PUBLIC_SANITY_DATASET)
-console.log("id",process.env.NEXT_PUBLIC_SANITY_TOKEN)
 // Function to save the order to Sanity
 const storeOrder = async (orderData: any) => {
   try {

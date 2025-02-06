@@ -7,7 +7,7 @@ import Hero from './components/Hero';
 import Features from './components/features';
 import NewCeramics from './components/NewCeramics';
 import PopularProducts from './components/PopularProducts';
-import StudioLondon from './components/StudioLondon';
+import StudioLondon from './components/StudioLondon';;
 
 function Home() {
   return (

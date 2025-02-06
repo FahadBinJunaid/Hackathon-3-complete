@@ -44,7 +44,7 @@ export default function Cart() {
     <div className="bg-[#FFFFFF] min-h-screen flex flex-col">
       <Navbar />
 
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 py-12 flex-grow">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 py-12 flex-grow pt-16 mt-16">
         {cartItems.length === 0 ? (
           <div className="flex flex-col items-center text-center py-16">
             <p className="text-[24px] font-semibold mb-4">Your cart is empty</p>

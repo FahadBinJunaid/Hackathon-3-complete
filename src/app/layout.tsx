@@ -1,12 +1,14 @@
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
-import Header from "./components/Header";
 import { CartProvider } from './context/CartContext';
-import Products from './allProducts/page';
-import Features from "./components/features";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,17 +24,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    
         <CartProvider>
-          {/* <Products /> */}
-          {/* <Features /> */}
-            {/* <Header /> */}
-            {/* <Navbar /> */}
-            {children}
-            {/* <Footer /> */}
+        <ClerkProvider>
+      <html lang="en">
+        <body>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
         </CartProvider>
-      </body>
-    </html>
   );
 }

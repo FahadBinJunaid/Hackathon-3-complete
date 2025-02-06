@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation'; // Import useRouter from Next.js
-import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -42,9 +41,8 @@ export default function Contact() {
 
   return (
     <div>
-      <Header />
       <Navbar />
-      <div className="max-w-[1440px] mx-auto px-32 py-12 mt-6">
+      <div className="max-w-[1440px] mx-auto px-32 py-12 pt-16 mt-16">
         <div className="grid sm:grid-cols-2 items-start gap-14 p-8 mx-auto max-w-4xl bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md font-[sans-serif]">
           <div>
             <h1 className="text-[#2A254B] text-3xl font-extrabold">Contact Us</h1>

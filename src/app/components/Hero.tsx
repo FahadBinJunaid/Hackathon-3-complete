@@ -3,42 +3,43 @@
 import Image from 'next/image';
 
 export default function Hero() {
-  return (
-    <div className="w-full h-screen bg-white flex items-center justify-center">
-      {/* Outer Container */}
-      <div className="w-full md:w-[88%] h-full md:h-[83%] flex flex-col md:flex-row">
-        {/* Purple Section */}
-        <div className="w-full md:w-[65.5%] h-[50%] md:h-full bg-[#2A254B] flex flex-col justify-center px-6 md:px-12">
-          {/* Title */}
-          <h1 className="text-[28px] md:text-[44px] text-white leading-tight mb-6 md:mb-12">
-            The furniture brand for the future, with timeless designs
-          </h1>
+    return (
+        <div className="relative bg-gradient-to-br from-[#2A254B] to-[#4B3A6B] text-white overflow-hidden pt-16 mt-16">
+            {/* Light Glow Effect */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.1)_10%,_transparent_70%)]" />
 
-          {/* Description */}
-          <p className="text-white/80 text-sm md:text-base leading-relaxed max-w-[500px] mb-6">
-            A new era in eco-friendly furniture with Avelon, the French luxury retail brand
-            offering tasteful colors and a modern display using cutting-edge web technologies.
-          </p>
+            {/* Hero Content */}
+            <div className="relative mx-auto max-w-6xl flex flex-col lg:flex-row-reverse items-center py-16 sm:py-24 lg:py-16 px-6 lg:px-11">
 
-          {/* View Collection Button */}
-          <button className="w-[180px] h-[48px] md:h-[56px] bg-white/10 text-white font-medium text-sm md:text-base hover:bg-white/20 transition-all">
-            View Collection
-          </button>
+                {/* Image Section - Fully Responsive */}
+                <div className="lg:w-[60%] sm:w-full flex justify-center items-center mb-6 lg:mb-6">
+                    <div className="relative w-full sm:w-[60%] md:w-[70%] lg:w-[70%] h-auto flex justify-center">
+                        <Image
+                            src="/Parent.png"
+                            alt="Luxury Chair"
+                            width={350}  // Reduced width for small screens
+                            height={250} // Reduced height for small screens
+                            className="object-contain rounded-lg shadow-md"
+                            priority
+                        />
+                    </div>
+                </div>
+
+                {/* Text Content (Purple Section) */}
+                <div className="lg:w-[40%] w-full text-center lg:text-left space-y-4 lg:pr-8 lg:pl-10">
+                    <h1 className="text-2xl sm:text-3xl font-bold leading-snug tracking-wide">
+                        Elevate Your Space with Timeless Furniture
+                    </h1>
+                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                        Experience high-quality, eco-friendly designs that redefine modern elegance.
+                    </p>
+                    <a href='/allProducts' >
+                        <button className="mt-5 px-5 py-2 sm:px-6 sm:py-3 text-sm sm:text-base font-semibold rounded-full bg-white text-[#2A254B] shadow-md hover:bg-gray-200 transition">
+                            Product Collection
+                        </button>
+                    </a>
+                </div>
+            </div>
         </div>
-
-        {/* Image Section */}
-        <div className="w-full md:w-[38%] h-[50%] md:h-full flex items-center justify-center bg-[#2A254B] md:bg-transparent">
-          <div className="relative w-[80%] h-[80%] md:w-full md:h-full">
-            <Image
-              src="/Parent.png"
-              alt="Modern chair"
-              fill
-              className="object-cover md:object-contain"
-              priority
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }

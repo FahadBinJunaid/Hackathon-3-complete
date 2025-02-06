@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Link from "next/link";
@@ -58,10 +57,9 @@ export default function AllProducts() {
     <div className="min-h-screen">
       {/* Wrapping the entire content in one parent div */}
       <div>
-        <Header />
         <Navbar />
 
-        <div className="w-full">
+        <div className="w-full pt-16 mt-16">
           {/* Banner Image */}
           <div className="relative w-full aspect-[16/3] sm:aspect-[16/4] md:aspect-[16/2]">
             <Image

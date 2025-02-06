@@ -155,7 +155,7 @@ export default function BillingDetails() {
   return (
     <div>
       <Navbar />
-      <div className="container mx-auto px-6 py-10">
+      <div className="container mx-auto px-6 py-10 pt-16 mt-16">
         <form
           onSubmit={handlePlaceOrder}
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-gray-50 p-8 rounded-lg shadow-md"

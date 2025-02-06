@@ -11,7 +11,7 @@ export default function AboutUs() {
       <Navbar />
       
       {/* Brand Banner - Made responsive */}
-      <div className="w-full bg-[#FFFFFF] py-12 sm:py-16 lg:py-20">
+      <div className="w-full bg-[#FFFFFF] py-12 sm:py-16 lg:py-20 pt-16 mt-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
           <h1 className="text-[32px] sm:text-[48px] leading-[120%] max-w-[736px]">
             A brand built on the love of craftmanship, quality and outstanding customer service

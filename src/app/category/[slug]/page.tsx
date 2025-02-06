@@ -45,7 +45,7 @@ export default async function CategoryPage({ params }: Props) {
     
     <div className="min-h-screen">
       <Navbar />
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 pt-16 mt-16">
         <h1 className="text-3xl font-bold mb-8 capitalize">{params.slug} Products</h1>
         
         {products.length === 0 ? (
