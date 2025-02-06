@@ -55,8 +55,8 @@ export default function Footer() {
           <div className="space-y-3">
             <h3 className="text-lg font-bold mb-2">Menu</h3>
             <ul className="space-y-2">
-              <li><Link href="/newArrivals" className="text-sm hover:underline">New arrivals</Link></li>
-              <li><Link href="/PopularThisWeek" className="text-sm hover:underline">Popular this week</Link></li>
+              <li><Link href="/allProducts" className="text-sm hover:underline">New arrivals</Link></li>
+              <li><Link href="/allProducts" className="text-sm hover:underline">Popular this week</Link></li>
               <li><Link href="/allProducts" className="text-sm hover:underline">All products</Link></li>
             </ul>
           </div>
