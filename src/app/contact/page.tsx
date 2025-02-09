@@ -42,19 +42,18 @@ export default function Contact() {
   return (
     <div>
       <Navbar />
-      <div className="max-w-[1440px] mx-auto px-32 py-12 pt-16 mt-16">
-        <div className="grid sm:grid-cols-2 items-start gap-14 p-8 mx-auto max-w-4xl bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md font-[sans-serif]">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 md:px-24 lg:px-32 py-12 pt-16 mt-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 items-start gap-8 sm:gap-14 p-6 sm:p-8 mx-auto max-w-4xl bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md font-[sans-serif]">
           <div>
-            <h1 className="text-[#2A254B] text-3xl font-extrabold">Contact Us</h1>
+            <h1 className="text-[#2A254B] text-2xl sm:text-3xl font-extrabold">Contact Us</h1>
             <p className="text-sm text-gray-500 mt-4">
               Have some big idea or brand to develop and need help? Then reach out we would love to hear about your project and provide help.
             </p>
-            {/* Contact email and socials here */}
           </div>
 
           <div>
-            <h2 className="text-[#2A254B] text-3xl font-extrabold">Send a Message</h2>
-            <form onSubmit={handleSubmit} className="mt-8">
+            <h2 className="text-[#2A254B] text-2xl sm:text-3xl font-extrabold">Send a Message</h2>
+            <form onSubmit={handleSubmit} className="mt-6 sm:mt-8">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                   Name
@@ -116,7 +115,7 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="mt-6 px-6 py-2 bg-[#2A254B] text-white font-semibold rounded-md hover:bg-[#1a1a2a]"
+                className="mt-6 w-full sm:w-auto px-6 py-2 bg-[#2A254B] text-white font-semibold rounded-md hover:bg-[#1a1a2a] text-center"
               >
                 Send Message
               </button>
